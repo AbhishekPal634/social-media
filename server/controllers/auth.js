@@ -33,8 +33,7 @@ export const login = async (req, res) => {
     const result = await db.query("SELECT * FROM users WHERE username = $1", [
       req.body.username,
     ]);
-    if (result.rows.length === 0)
-      return res.status(404).json("User not found.");
+    if (result.rows.length === 0) return res.status(404).json("User not found");
 
     const checkPassword = bcrypt.compareSync(
       req.body.password,
@@ -42,7 +41,7 @@ export const login = async (req, res) => {
     );
 
     if (!checkPassword)
-      return res.status(400).json("Wrong username or password.");
+      return res.status(400).json("Wrong username or password");
 
     const token = jwt.sign({ id: result.rows[0].id }, "secretkey"); //store secretkey in .env later
 
@@ -66,5 +65,5 @@ export const logout = (req, res) => {
       sameSite: "none",
     })
     .status(200)
-    .json("User has been logged out.");
+    .json("User has been logged out");
 };
