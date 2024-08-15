@@ -14,22 +14,27 @@ import Login from "./pages/login/Login";
 import Register from "./pages/register/Register";
 import { useContext } from "react";
 import { AuthContext } from "./context/authContext";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 function App() {
   const { currentUser } = useContext(AuthContext);
 
+  const queryClient = new QueryClient();
+
   function Layout() {
     return (
-      <div className="bg-gray-100 dark:bg-gray-700 transition-colors duration-300">
-        <Navbar />
-        <div className="flex">
-          <LeftBar />
-          <div className="flex-[6]">
-            <Outlet />
+      <QueryClientProvider client={queryClient}>
+        <div className="bg-gray-100 dark:bg-gray-700 transition-colors duration-300">
+          <Navbar />
+          <div className="flex">
+            <LeftBar />
+            <div className="flex-[6]">
+              <Outlet />
+            </div>
+            <RightBar />
           </div>
-          <RightBar />
         </div>
-      </div>
+      </QueryClientProvider>
     );
   }
 

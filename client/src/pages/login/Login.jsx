@@ -1,12 +1,31 @@
-import React, { useContext } from "react";
-import { Link } from "react-router-dom";
+import React, { useContext, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/authContext";
 
 function Login() {
+  const [inputs, setInputs] = useState({
+    username: "",
+    password: "",
+  });
+
+  const [error, setError] = useState(null);
+
+  const navigate = useNavigate();
+
+  function handleChange(event) {
+    setInputs((prev) => ({ ...prev, [event.target.name]: event.target.value }));
+  }
+
   const { login } = useContext(AuthContext);
 
-  function handleLogin() {
-    return login();
+  async function handleLogin(event) {
+    event.preventDefault();
+    try {
+      await login(inputs);
+      navigate("/");
+    } catch (error) {
+      setError(error.response.data);
+    }
   }
 
   return (
@@ -37,6 +56,7 @@ function Login() {
                 name="username"
                 type="username"
                 autocomplete="username"
+                onChange={handleChange}
                 required
                 className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
               />
@@ -66,10 +86,12 @@ function Login() {
                 name="password"
                 type="password"
                 autocomplete="current-password"
+                onChange={handleChange}
                 required
                 className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
               />
             </div>
+            <div className="py-2 text-sm text-red-500">{error && error}</div>
           </div>
 
           <div>
