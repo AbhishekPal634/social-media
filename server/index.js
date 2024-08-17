@@ -45,7 +45,6 @@ db.connect((err) => {
   } else {
     console.log("Connected to the database.");
 
-    // Routes
     app.post("/api/upload", upload.single("file"), (req, res) => {
       const file = req.file;
       res.status(200).json(file.filename);
@@ -57,7 +56,6 @@ db.connect((err) => {
     app.use("/api/likes", likeRoutes);
     app.use("/api/comments", commentRoutes);
 
-    // Start the server
     app.listen(port, () => {
       console.log(`Server running on http://localhost:${port}`);
     });

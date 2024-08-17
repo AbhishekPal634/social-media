@@ -80,7 +80,7 @@ function PostCard({ post }) {
             <BookmarkBorderOutlinedIcon />
           </div>
         </div>
-        {commentOpen && <Comments />}
+        {commentOpen && <Comments postId={post.id} />}
       </div>
     </div>
   );

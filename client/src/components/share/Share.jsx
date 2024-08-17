@@ -89,6 +89,7 @@ function Share() {
           <input
             type="file"
             id="file"
+            accept="image/*"
             style={{ display: "none" }}
             onChange={(event) => setFile(event.target.files[0])}
           />
