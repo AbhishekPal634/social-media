@@ -32,7 +32,6 @@ function MobileMenu() {
           icon={<MessageOutlinedIcon />}
           text="Messages"
         />
-        <LeftBarOptions link="#" icon={<GroupsOutlinedIcon />} text="Groups" />
         <LeftBarOptions link="#" icon={<PeopleOutlinedIcon />} text="Friends" />
         <LeftBarOptions link="#" icon={<FavoriteBorderIcon />} text="Likes" />
         <LeftBarOptions
@@ -42,18 +41,8 @@ function MobileMenu() {
         />
         <LeftBarOptions
           link="#"
-          icon={<CollectionsOutlinedIcon />}
-          text="Posts"
-        />
-        <LeftBarOptions
-          link="#"
           icon={<BookmarksOutlinedIcon />}
           text="Bookmarks"
-        />
-        <LeftBarOptions
-          link="#"
-          icon={<HistoryOutlinedIcon />}
-          text="Memories"
         />
         <LeftBarOptions
           link="#"

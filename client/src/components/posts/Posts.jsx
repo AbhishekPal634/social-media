@@ -9,7 +9,7 @@ function Posts() {
     queryKey: ["posts"],
     queryFn: () =>
       makeRequest.get("/posts").then((res) => {
-        return res.data;
+        return res.data.rows;
       }),
   });
   return (

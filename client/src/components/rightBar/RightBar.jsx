@@ -6,11 +6,12 @@ import RightBarOnlineFriends from "./RightBarOnlineFriends";
 
 function RightBar() {
   const noScrollbarStyle = {
-    "::-webkit-scrollbar": {
-      display: "none",
-    },
-    "-ms-overflow-style": "none" /* IE and Edge */,
-    "scrollbar-width": "none" /* Firefox */,
+    WebkitOverflowScrolling: "touch", // For smooth scrolling on iOS
+    overflowX: "hidden",
+    overflowY: "scroll",
+    scrollbarWidth: "none" /* Firefox */,
+    msOverflowStyle: "none" /* IE and Edge */,
+    scrollBehavior: "smooth", // Adding smooth scrolling
   };
   return (
     <div

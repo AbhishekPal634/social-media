@@ -38,15 +38,15 @@ function Navbar() {
             <MenuIcon onClick={handleMenuClick} className="cursor-pointer" />
           </div>
           <Link to="/">
-            <span className="font-bold text-xl text-indigo-600">VibeSync</span>
+            <span className="font-bold text-xl text-indigo-600">L-Aura</span>
           </Link>
           <div className="sm:flex items-center gap-3 border border-gray-300 rounded-full py-1 px-4 w-72 hidden">
-            <SearchOutlinedIcon />
             <input
-              className="border-0 w-96 focus:outline-none p-1 dark:bg-gray-800 transition-colors duration-300"
+              className="border-0 w-96 focus:outline-none p-1 bg-transparent  "
               type="text"
               placeholder="Search"
             />
+            <SearchOutlinedIcon />
           </div>
         </div>
         <div className="flex items-center gap-5">
@@ -55,10 +55,10 @@ function Navbar() {
             className="hover:cursor-pointer hover:text-blue-400"
           />
           <NotificationsOutlinedIcon className="hover:cursor-pointer hover:text-blue-400" />
-          <div className="flex items-center gap-3 font-semibold">
+          <div className="flex items-center gap-2 font-semibold">
             <img
               className="w-8 h-8 rounded-full object-cover"
-              src={currentUser.profilePic}
+              src={currentUser.profilepic}
               alt="profile"
             />
             <span className="hidden lg:block">{currentUser.name}</span>

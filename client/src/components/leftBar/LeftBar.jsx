@@ -12,11 +12,12 @@ import BookmarksOutlinedIcon from "@mui/icons-material/BookmarksOutlined";
 
 function LeftBar() {
   const noScrollbarStyle = {
-    "::-webkit-scrollbar": {
-      display: "none",
-    },
-    "-ms-overflow-style": "none" /* IE and Edge */,
-    "scrollbar-width": "none" /* Firefox */,
+    WebkitOverflowScrolling: "touch", // For smooth scrolling on iOS
+    overflowX: "hidden",
+    overflowY: "scroll",
+    scrollbarWidth: "none" /* Firefox */,
+    msOverflowStyle: "none" /* IE and Edge */,
+    scrollBehavior: "smooth", // Adding smooth scrolling
   };
   return (
     <div className="flex-[2] sticky top-[4rem] h-[calc(100vh-4rem)] hidden xl:block">
@@ -32,11 +33,6 @@ function LeftBar() {
           />
           <LeftBarOptions
             link="#"
-            icon={<GroupsOutlinedIcon />}
-            text="Groups"
-          />
-          <LeftBarOptions
-            link="#"
             icon={<PeopleOutlinedIcon />}
             text="Friends"
           />
@@ -48,18 +44,8 @@ function LeftBar() {
           />
           <LeftBarOptions
             link="#"
-            icon={<CollectionsOutlinedIcon />}
-            text="Posts"
-          />
-          <LeftBarOptions
-            link="#"
             icon={<BookmarksOutlinedIcon />}
             text="Bookmarks"
-          />
-          <LeftBarOptions
-            link="#"
-            icon={<HistoryOutlinedIcon />}
-            text="Memories"
           />
         </div>
         <div className="w-full mt-auto mb-3">
