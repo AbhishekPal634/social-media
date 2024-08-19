@@ -1,4 +1,5 @@
 import React from "react";
+import AddOutlinedIcon from "@mui/icons-material/AddOutlined";
 
 function RightBarUserSuggestion(props) {
   return (
@@ -6,23 +7,20 @@ function RightBarUserSuggestion(props) {
       {/* userinfo */}
       <div className="flex items-center gap-5">
         <img
-          className="w-8 h-8 rounded-full object-cover"
+          className="w-10 h-10 rounded-full object-cover"
           src={props.image}
           alt="profile image"
         ></img>
-        <span className="font-medium text-black text-sm dark:text-white transition-colors duration-300">
-          {props.name}
-        </span>
+        <div className="flex flex-col justify-center">
+          <span className="font-medium text-gray-600 dark:text-gray-300 transition-colors duration-300">
+            {props.name}
+          </span>
+          <span className="text-xs text-gray-500 dark:text-gray-400 transition-colors duration-300">
+            @{props.username}
+          </span>
+        </div>
       </div>
-      {/* buttons */}
-      <div className="flex items-center gap-3">
-        <button className="border-0 py-1 px-3 text-white cursor-pointer bg-blue-500 rounded-full text-sm">
-          Follow
-        </button>
-        <button className="border-0 py-1 px-3 text-white cursor-pointer bg-red-500 rounded-full text-sm">
-          Dismiss
-        </button>
-      </div>
+      <AddOutlinedIcon className="text-gray-400 hover:cursor-pointer" />
     </div>
   );
 }

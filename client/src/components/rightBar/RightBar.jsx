@@ -22,19 +22,31 @@ function RightBar() {
       <div className="py-5 px-5">
         {/* item */}
         <ItemCard
-          text="Suggestions For You"
+          text="Friend Suggestions"
           items={[
             <RightBarUserSuggestion
               name="John Doii"
+              username="johndoii"
               image="/images/registerCardBg.jpg"
             />,
             <RightBarUserSuggestion
               name="John Die"
+              username="johndie"
+              image="/images/registerCardBg.jpg"
+            />,
+            <RightBarUserSuggestion
+              name="John Doii"
+              username="johndoii"
+              image="/images/registerCardBg.jpg"
+            />,
+            <RightBarUserSuggestion
+              name="John Die"
+              username="johndie"
               image="/images/registerCardBg.jpg"
             />,
           ]}
         />
-        <ItemCard
+        {/* <ItemCard
           text="Latest Activities"
           items={[
             <RightBarLatestActivities
@@ -62,24 +74,28 @@ function RightBar() {
               time="yesterday"
             />,
           ]}
-        />
+        /> */}
         <ItemCard
           text="Online Friends"
           items={[
             <RightBarOnlineFriends
               name="John Doii"
+              username="johndoii"
               image="/images/registerCardBg.jpg"
             />,
             <RightBarOnlineFriends
               name="John Doo"
+              username="johndoo"
               image="/images/registerCardBg.jpg"
             />,
             <RightBarOnlineFriends
               name="John Dont"
+              username="johndont"
               image="/images/registerCardBg.jpg"
             />,
             <RightBarOnlineFriends
               name="John Die"
+              username="johndie"
               image="/images/registerCardBg.jpg"
             />,
           ]}

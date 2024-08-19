@@ -51,11 +51,6 @@ function MobileMenu() {
         />
         <LeftBarOptions
           link="#"
-          icon={<TaskOutlinedIcon />}
-          text="Latest Activities"
-        />
-        <LeftBarOptions
-          link="#"
           icon={<MobileFriendlyOutlinedIcon />}
           text="Online Friends"
         />

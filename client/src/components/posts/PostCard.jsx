@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
 import FavoriteOutlinedIcon from "@mui/icons-material/FavoriteOutlined";
 import TextsmsOutlinedIcon from "@mui/icons-material/TextsmsOutlined";
@@ -9,12 +9,41 @@ import BookmarkOutlinedIcon from "@mui/icons-material/BookmarkOutlined";
 import { Link } from "react-router-dom";
 import Comments from "../comments/Comments";
 import moment from "moment";
+import { useQuery } from "@tanstack/react-query";
+import { makeRequest } from "../../axios";
+import { AuthContext } from "../../context/authContext";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 function PostCard({ post }) {
   const [commentOpen, setCommentOpen] = useState(false);
 
-  //TEMPORARY
-  const liked = true;
+  const { currentUser } = useContext(AuthContext);
+  const queryClient = useQueryClient();
+
+  const { isLoading, error, data } = useQuery({
+    queryKey: ["likes", post.id],
+    queryFn: () =>
+      makeRequest.get("/likes?postid=" + post.id).then((res) => {
+        return res.data;
+      }),
+  });
+
+  const mutation = useMutation({
+    mutationFn: (liked) => {
+      if (liked) {
+        return makeRequest.delete("/likes?postid=" + post.id);
+      } else {
+        return makeRequest.post("/likes", { postid: post.id });
+      }
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries(["likes"]);
+    },
+  });
+
+  const handleLike = () => {
+    mutation.mutate(data && data.includes(currentUser.id));
+  };
 
   return (
     <div className="shadow-sm px-5 py-1 rounded-2xl mb-4 bg-white dark:bg-gray-800 transition-colors duration-300">
@@ -55,16 +84,24 @@ function PostCard({ post }) {
         </div>
         <div className="flex justify-between">
           <div className="flex items-center gap-5">
-            <div className="flex items-center gap-2 cursor-pointer text-sm">
-              {liked ? (
-                <FavoriteOutlinedIcon className="text-red-500" />
+            <div className="flex items-center gap-2 text-sm">
+              {isLoading ? (
+                "Loading..."
+              ) : data && data.includes(currentUser.id) ? (
+                <FavoriteOutlinedIcon
+                  className="text-red-500 cursor-pointer"
+                  onClick={handleLike}
+                />
               ) : (
-                <FavoriteBorderOutlinedIcon />
+                <FavoriteBorderOutlinedIcon
+                  className="cursor-pointer"
+                  onClick={handleLike}
+                />
               )}
-              <span>69</span>
+              <span>{data ? data.length : 0}</span>
             </div>
             <div
-              className="flex items-center gap-2 cursor-pointer text-sm"
+              className="flex items-center gap-2 text-sm"
               onClick={() => {
                 setCommentOpen(!commentOpen);
               }}

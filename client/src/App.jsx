@@ -28,7 +28,7 @@ function App() {
           <Navbar />
           <div className="flex">
             <LeftBar />
-            <div className="flex-[6]">
+            <div className="flex-[6.5]">
               <Outlet />
             </div>
             <RightBar />

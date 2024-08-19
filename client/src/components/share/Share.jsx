@@ -69,7 +69,7 @@ function Share() {
           />
           <textarea
             className="w-full p-2 focus:outline-none border-b-2 border-gray-500 dark:bg-gray-800 transition-colors duration-300 resize-none overflow-hidden"
-            placeholder={`What's on your mind ${currentUser.name}?`}
+            placeholder={`What's new, ${currentUser.name}?`}
             value={desc}
             onChange={handleChange}
             onInput={handleInput}

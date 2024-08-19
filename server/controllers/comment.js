@@ -35,9 +35,8 @@ export const addComment = async (req, res) => {
           req.body.postid,
         ]
       );
-      return res.status(200).json("omment added Successfully!");
+      return res.status(200).json("Comment added Successfully!");
     } catch (error) {
-      console.error("Database Error:", error.message, error.stack); // Log detailed error
       return res.status(500).json("Internal Server Error: " + error.message);
     }
   });
