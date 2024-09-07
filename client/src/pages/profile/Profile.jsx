@@ -8,18 +8,49 @@ import LanguageIcon from "@mui/icons-material/Language";
 import EmailOutlinedIcon from "@mui/icons-material/EmailOutlined";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import Posts from "../../components/posts/Posts";
+import { useQuery } from "@tanstack/react-query";
+import { makeRequest } from "../../axios";
+import { useLocation } from "react-router-dom";
+import { useContext } from "react";
+import { AuthContext } from "../../context/authContext";
 
 function Profile() {
+  const location = useLocation();
+  const userId = parseInt(location.pathname.split("/")[2]);
+
+  const { currentUser } = useContext(AuthContext);
+
+  const { isLoading, error, data } = useQuery({
+    queryKey: ["user", userId],
+    queryFn: () =>
+      makeRequest.get("/users/find/" + userId).then((res) => {
+        return res.data;
+      }),
+    enabled: !!userId,
+  });
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return <div>Error loading profile!</div>;
+  }
+
+  if (!data) {
+    return <div>No user data available!</div>;
+  }
+
   return (
     <div className="bg-gray-100 dark:bg-gray-700 transition-colors duration-300">
       <div className="w-full h-72 relative">
         <img
-          src="https://images.pexels.com/photos/13440765/pexels-photo-13440765.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+          src={data.coverpic}
           alt="cover image"
           className="w-full h-full object-cover"
         />
         <img
-          src="https://images.pexels.com/photos/14028501/pexels-photo-14028501.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load"
+          src={data.profilepic}
           alt="profile image"
           className="w-48 h-48 object-cover rounded-full absolute left-0 right-0 m-auto top-48"
         />
@@ -44,20 +75,26 @@ function Profile() {
             </a>
           </div>
           <div className="sm:flex-1 flex flex-col items-center gap-2 sm:mt-10">
-            <span className="text-3xl font-medium">Jane Doe</span>
+            <span className="text-3xl font-medium">{data.name}</span>
             <div className="flex items-center justify-around w-full">
               <div className="flex items-center gap-1 text-gray-400">
                 <PlaceIcon fontSize="medium" />
-                <span className="text-sm">USA</span>
+                <span className="text-sm">{data.city}</span>
               </div>
               <div className="flex items-center gap-1 text-gray-400">
                 <LanguageIcon fontSize="medium" />
-                <span className="text-sm">website.com</span>
+                <span className="text-sm">{data.website}</span>
               </div>
             </div>
-            <button className="py-1 px-3 border-0 rounded-full bg-blue-500 text-sm font-medium text-white">
-              Follow
-            </button>
+            {userId === currentUser.id ? (
+              <button className="py-1 px-3 border-0 rounded-full bg-blue-500 text-sm font-medium text-white">
+                Update
+              </button>
+            ) : (
+              <button className="py-1 px-3 border-0 rounded-full bg-blue-500 text-sm font-medium text-white">
+                Follow
+              </button>
+            )}
           </div>
           <div className="sm:flex-1 flex items-center justify-end gap-2">
             <EmailOutlinedIcon fontSize="medium" />

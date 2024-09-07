@@ -38,7 +38,7 @@ function Navbar() {
             <MenuIcon onClick={handleMenuClick} className="cursor-pointer" />
           </div>
           <Link to="/">
-            <span className="font-bold text-xl text-indigo-600">L-Aura</span>
+            <span className="font-bold text-xl text-indigo-600">Name Here</span>
           </Link>
           <div className="sm:flex items-center gap-3 border border-gray-300 rounded-full py-1 px-4 w-72 hidden">
             <input

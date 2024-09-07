@@ -57,7 +57,7 @@ function PostCard({ post }) {
             />
             <div className="flex flex-col">
               <Link
-                to={`/profile/${post.userId}`}
+                to={`/profile/${post.userid}`}
                 style={{ textDecoration: "none", color: "inherit" }}
               >
                 <div className="flex flex-col">
