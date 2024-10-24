@@ -1,6 +1,9 @@
 import db from "../connect.js";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
+import env from "dotenv";
+
+env.config();
 
 export const register = async (req, res) => {
   //Check user if exists
@@ -43,7 +46,7 @@ export const login = async (req, res) => {
     if (!checkPassword)
       return res.status(400).json("Wrong username or password");
 
-    const token = jwt.sign({ id: result.rows[0].id }, "secretkey"); //store secretkey in .env later
+    const token = jwt.sign({ id: result.rows[0].id }, process.env.SECRET_KEY);
 
     const { password, ...others } = result.rows[0];
 

@@ -1,6 +1,9 @@
 import db from "../connect.js";
 import jwt from "jsonwebtoken";
 import moment from "moment/moment.js";
+import env from "dotenv";
+
+env.config();
 
 export const getComments = async (req, res) => {
   try {
@@ -22,7 +25,7 @@ export const addComment = async (req, res) => {
   const token = req.cookies.accessToken;
   if (!token) return res.status(401).json("Not logged in!");
 
-  jwt.verify(token, "secretkey", async (error, userInfo) => {
+  jwt.verify(token, process.env.SECRET_KEY, async (error, userInfo) => {
     if (error) return res.status(403).json("Token not valid!");
     try {
       const data = await db.query(
